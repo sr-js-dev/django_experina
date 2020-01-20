@@ -1,0 +1,608 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-18 11:48+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/orders/forms.py:15 apps/products/models.py:17
+msgid "Size"
+msgstr ""
+
+#: apps/orders/forms.py:18 apps/orders/forms.py:24 apps/products/models.py:29
+msgid "Color"
+msgstr ""
+
+#: apps/orders/forms.py:21
+msgid "Image"
+msgstr ""
+
+#: apps/orders/forms.py:46 apps/orders/forms.py:53 apps/orders/forms.py:56
+msgid "Choose an option"
+msgstr ""
+
+#: apps/orders/models.py:13
+msgid "first name"
+msgstr ""
+
+#: apps/orders/models.py:14
+msgid "last name"
+msgstr ""
+
+#: apps/orders/models.py:15
+msgid "e-mail"
+msgstr ""
+
+#: apps/orders/models.py:16
+msgid "address"
+msgstr ""
+
+#: apps/orders/models.py:17 apps/orders/models.py:82
+msgid "postal code"
+msgstr ""
+
+#: apps/orders/models.py:18
+msgid "city"
+msgstr ""
+
+#: apps/orders/models.py:19
+msgid "remarks"
+msgstr ""
+
+#: apps/orders/models.py:22
+msgid "Order"
+msgstr ""
+
+#: apps/orders/models.py:23
+msgid "Orders"
+msgstr ""
+
+#: apps/orders/models.py:26
+#, python-brace-format
+msgid "Order {self.id}"
+msgstr ""
+
+#: apps/orders/models.py:34
+#, python-brace-format
+msgid "Order no. #0{self.id} successfully registered"
+msgstr ""
+
+#: apps/orders/models.py:38
+#, python-brace-format
+msgid ""
+"Hi {self.first_name}, \n"
+"\n"
+" Your Order no. #0{self.id} was successfully registered.\n"
+"\n"
+"You will soon be contacted by someone from our Sales Department in order to "
+"discuss further details about delivery and payment.\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"Best regards,\n"
+"experina.nl Team"
+msgstr ""
+
+#: apps/orders/models.py:43
+#, python-brace-format
+msgid "New Order placed: no. #0{self.id}"
+msgstr ""
+
+#: apps/orders/models.py:49
+#, python-brace-format
+msgid ""
+"Hi there, \n"
+"\n"
+" You have a new Order from {self.first_name} {self.last_name} ({self."
+"email}). \n"
+"\n"
+"Order no. #0{self.id} of total value: € {self.total_order}\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"\n"
+" Best regards,\n"
+"Your trustworthy Notification Robot"
+msgstr ""
+
+#: apps/orders/models.py:60
+msgid "order"
+msgstr ""
+
+#: apps/orders/models.py:67 apps/products/models.py:202
+msgid "product"
+msgstr ""
+
+#: apps/orders/models.py:70
+msgid "custom image"
+msgstr ""
+
+#: apps/orders/models.py:73
+msgid "custom color"
+msgstr ""
+
+#: apps/orders/models.py:76
+msgid "product name"
+msgstr ""
+
+#: apps/orders/models.py:79 apps/products/models.py:106
+#: apps/products/models.py:225
+msgid "color"
+msgstr ""
+
+#: apps/orders/models.py:84 apps/products/models.py:204
+msgid "price"
+msgstr ""
+
+#: apps/orders/models.py:86
+msgid "quantity"
+msgstr ""
+
+#: apps/orders/models.py:88
+msgid "image"
+msgstr ""
+
+#: apps/orders/models.py:94
+msgid "Order Item"
+msgstr ""
+
+#: apps/orders/models.py:95
+msgid "Order Items"
+msgstr ""
+
+#: apps/orders/views.py:29
+msgid "Product added to your Shopping Bag."
+msgstr ""
+
+#: apps/orders/views.py:47
+msgid "Product updated to your Shopping Bag."
+msgstr ""
+
+#: apps/orders/views.py:57
+msgid "Product removed from your Shopping Bag."
+msgstr ""
+
+#: apps/orders/views.py:87
+#, python-brace-format
+msgid ""
+"Order no. #0{order.id} successfully registered. You will receive an email "
+"with further instructions."
+msgstr ""
+
+#: apps/products/admin.py:71
+msgid "Variations created."
+msgstr ""
+
+#: apps/products/admin.py:74
+msgid "Create Product Variations"
+msgstr ""
+
+#: apps/products/models.py:10 apps/products/models.py:22
+#: apps/products/models.py:44 apps/products/models.py:98
+msgid "name"
+msgstr ""
+
+#: apps/products/models.py:18
+msgid "Sizes"
+msgstr ""
+
+#: apps/products/models.py:30
+msgid "Colors"
+msgstr ""
+
+#: apps/products/models.py:46 apps/products/models.py:100
+msgid "slug"
+msgstr ""
+
+#: apps/products/models.py:49
+msgid "Category Image"
+msgstr ""
+
+#: apps/products/models.py:51 apps/products/models.py:122
+#: apps/products/models.py:123 apps/products/models.py:125
+#: apps/products/models.py:127
+msgid "image ration"
+msgstr ""
+
+#: apps/products/models.py:52 apps/products/models.py:128
+msgid "is featured"
+msgstr ""
+
+#: apps/products/models.py:59
+msgid "Category"
+msgstr ""
+
+#: apps/products/models.py:60
+msgid "Categories"
+msgstr ""
+
+#: apps/products/models.py:77
+msgid "Customer Image"
+msgstr ""
+
+#: apps/products/models.py:78
+msgid "Customer Images"
+msgstr ""
+
+#: apps/products/models.py:89
+msgid "Customer Color"
+msgstr ""
+
+#: apps/products/models.py:90
+msgid "Customer Colors"
+msgstr ""
+
+#: apps/products/models.py:103 apps/products/models.py:217
+msgid "size"
+msgstr ""
+
+#: apps/products/models.py:109
+msgid "categories"
+msgstr ""
+
+#: apps/products/models.py:112
+msgid "Customer can choose an Image"
+msgstr ""
+
+#: apps/products/models.py:115
+msgid "Customer can choose a Color"
+msgstr ""
+
+#: apps/products/models.py:117
+msgid "description"
+msgstr ""
+
+#: apps/products/models.py:118
+msgid "extra info"
+msgstr ""
+
+#: apps/products/models.py:120
+msgid "image from Product Detail Page"
+msgstr ""
+
+#: apps/products/models.py:132
+msgid "minimum order"
+msgstr ""
+
+#: apps/products/models.py:138
+msgid "related products"
+msgstr ""
+
+#: apps/products/models.py:145
+msgid "Product"
+msgstr ""
+
+#: apps/products/models.py:146
+msgid "Products"
+msgstr ""
+
+#: apps/products/models.py:207
+msgid "minimum quantity"
+msgstr ""
+
+#: apps/products/models.py:211
+msgid "maximum quanbtity"
+msgstr ""
+
+#: apps/products/models.py:234
+msgid "Price"
+msgstr ""
+
+#: apps/products/models.py:235
+msgid "Prices"
+msgstr ""
+
+#: config/settings/__init__.py:113
+msgid "Dutch"
+msgstr ""
+
+#: config/settings/__init__.py:114
+msgid "English"
+msgstr ""
+
+#: templates/base.html:38 templates/base.html:72
+msgid "SEARCH"
+msgstr ""
+
+#: templates/base.html:46
+msgid "shop"
+msgstr ""
+
+#: templates/base.html:56
+msgid "cart"
+msgstr ""
+
+#: templates/base.html:89
+msgid "home"
+msgstr ""
+
+#: templates/base.html:90
+msgid "about experina"
+msgstr ""
+
+#: templates/base.html:91
+msgid "contact"
+msgstr ""
+
+#: templates/base.html:142 templates/pages/contact.html:14
+msgid "addresss"
+msgstr ""
+
+#: templates/base.html:167
+msgid "Experina Sportprijzen All Rights Reserved."
+msgstr ""
+
+#: templates/base.html:168
+msgid "T&C"
+msgstr ""
+
+#: templates/base.html:170
+msgid "Privacy Policy"
+msgstr ""
+
+#: templates/base.html:174
+msgid "Designed by Johan Boerema"
+msgstr ""
+
+#: templates/orders/cart-details.html:9
+#, python-format
+msgid ""
+"Shopping cart - <span class=\"amount-items\">%(total_items)s items</span>"
+msgstr ""
+
+#: templates/orders/cart-details.html:16
+msgid "Item"
+msgstr ""
+
+#: templates/orders/cart-details.html:17
+msgid "Unit Price"
+msgstr ""
+
+#: templates/orders/cart-details.html:18
+msgid "Quantity"
+msgstr ""
+
+#: templates/orders/cart-details.html:19
+msgid "Sub Total"
+msgstr ""
+
+#: templates/orders/cart-details.html:36
+msgid "Product Code:"
+msgstr ""
+
+#: templates/orders/cart-details.html:39
+msgid "In Stock"
+msgstr ""
+
+#: templates/orders/cart-details.html:43
+msgid "Delete"
+msgstr ""
+
+#: templates/orders/cart-details.html:57
+msgid "Update"
+msgstr ""
+
+#: templates/orders/cart-details.html:64
+#: templates/orders/order-details.html:145
+msgid "Summary"
+msgstr ""
+
+#: templates/orders/cart-details.html:66
+#: templates/orders/order-details.html:147
+msgid "Subtotal"
+msgstr ""
+
+#: templates/orders/cart-details.html:67
+#: templates/orders/order-details.html:148
+msgid "Shipping"
+msgstr ""
+
+#: templates/orders/cart-details.html:68
+#: templates/orders/order-details.html:149
+msgid "Tax"
+msgstr ""
+
+#: templates/orders/cart-details.html:70
+#: templates/orders/order-details.html:151
+msgid "Total"
+msgstr ""
+
+#: templates/orders/cart-details.html:73
+msgid "PROCEED TO PAYMENT"
+msgstr ""
+
+#: templates/orders/order-details.html:8
+msgid "Checkout"
+msgstr ""
+
+#: templates/orders/order-details.html:14
+msgid "SHIPPING"
+msgstr ""
+
+#: templates/orders/order-details.html:24
+msgid "YOUR SHIPPING INFORMATION"
+msgstr ""
+
+#: templates/orders/order-details.html:40
+msgid "First name:"
+msgstr ""
+
+#: templates/orders/order-details.html:54
+msgid "Last Name:"
+msgstr ""
+
+#: templates/orders/order-details.html:68
+msgid "Email:"
+msgstr ""
+
+#: templates/orders/order-details.html:84
+msgid "Address:"
+msgstr ""
+
+#: templates/orders/order-details.html:98
+msgid "Postal code:"
+msgstr ""
+
+#: templates/orders/order-details.html:112
+msgid "City:"
+msgstr ""
+
+#: templates/orders/order-details.html:128
+msgid "Remarks:"
+msgstr ""
+
+#: templates/orders/order-details.html:141
+msgid "submit"
+msgstr ""
+
+#: templates/pages/about.html:8
+msgid "About Experina"
+msgstr ""
+
+#: templates/pages/about.html:14
+msgid ""
+"Experina Sports prices wants to be a (web) store that is ready for the "
+"customer. We are service oriented."
+msgstr ""
+
+#: templates/pages/about.html:15
+msgid ""
+"We have a small stock to deliver directly and if necessary, we immediately "
+"turn on the engraving machine to provide the customer with sports prizes."
+msgstr ""
+
+#: templates/pages/about.html:16
+msgid "We often have a chat with the customer and put a cup of coffee."
+msgstr ""
+
+#: templates/pages/about.html:17
+msgid ""
+"We also want to deliver quality and of course on time. We go there for ......"
+msgstr ""
+
+#: templates/pages/about.html:18
+msgid ""
+"Bringing the ordered home home is often no problem for us. The customer does "
+"not have to travel twice."
+msgstr ""
+
+#: templates/pages/about.html:19
+msgid ""
+"For specific questions we dive into the books of the wholesalers and if "
+"necessary we get a product from abroad."
+msgstr ""
+
+#: templates/pages/about.html:20
+msgid ""
+"Nowadays we can make mugs and what not. We too do not want to stand still."
+msgstr ""
+
+#: templates/pages/about.html:21
+msgid ""
+"Your own logo on a cup and medal also belongs to the possibilities. And that "
+"often at a very small extra price."
+msgstr ""
+
+#: templates/pages/about.html:22
+#, python-format
+msgid ""
+"In short, we are 100%% customer-oriented and basically do not sell no. And "
+"that at low cost."
+msgstr ""
+
+#: templates/pages/about.html:23
+msgid ""
+"However, we are not of those bullies, a medal with a sticker on the back we "
+"have some trouble with it."
+msgstr ""
+
+#: templates/pages/about.html:24
+msgid "We choose originality and quality."
+msgstr ""
+
+#: templates/pages/contact.html:8
+msgid "Contact"
+msgstr ""
+
+#: templates/pages/contact.html:27
+msgid "Facebook:"
+msgstr ""
+
+#: templates/pages/contact.html:29
+msgid ""
+"Click  <a href=\"https://www.facebook.com/pages/Experina-"
+"Sportprijzen/132804423566121\" target=\"_blank\">here</a>  to go to our page "
+"on Facebook"
+msgstr ""
+
+#: templates/pages/index.html:12
+msgid "VIEW OUR EXCLUSIVE"
+msgstr ""
+
+#: templates/pages/index.html:14
+msgid "<span>NEW</span> PRODUCTS FOR 2017"
+msgstr ""
+
+#: templates/pages/index.html:24
+msgid "Top categories"
+msgstr ""
+
+#: templates/pages/index.html:46
+msgid "Feature item"
+msgstr ""
+
+#: templates/products/category_products.html:11
+#: templates/products/search_products.html:12
+#, python-format
+msgid "Showing %(product_count)s Results"
+msgstr ""
+
+#: templates/products/category_products.html:29
+#: templates/products/product_detail.html:29
+#: templates/products/search_products.html:32
+msgid "Add to cart"
+msgstr ""
+
+#: templates/products/product_detail.html:39
+msgid "Please select color and/or size."
+msgstr ""
+
+#: templates/products/product_detail.html:47
+msgid "PRODUCT DETAILS"
+msgstr ""
+
+#: templates/products/product_detail.html:51
+msgid "OTHER INFORMATION"
+msgstr ""
+
+#: templates/products/product_detail.html:69
+msgid "Related Product"
+msgstr ""
+
+#: templates/products/product_detail.html:82
+msgid "View details"
+msgstr ""
+
+#: templates/products/search_products.html:8
+#, python-format
+msgid " Search result by '%(q_term)s':"
+msgstr ""
+
+#: templates/products/search_products.html:39
+msgid "No products found..."
+msgstr ""

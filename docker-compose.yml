@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  experina:
+    image: experina
+    build: .
+    container_name: experina
+    restart: always
+    working_dir: /app/
+    command: >
+      bash -c "python ./manage.py runserver 0.0.0.0:8080"
+    stdin_open: true
+    tty: true
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=True
+      - APPEND_SLASH=True
+      - PREPEND_WWW=False
+      - ENV=local
+      - PORT=8080
+      - GUNICORN_WORKERS=1
+      - SECURE_SSL_REDIRECT=False
+      - BASE_URL=http://localhost:8080
+        HOST=localhost:8080
+      - GUNICORN_TIMEOUT=30
+      - GUNICORN_LOGLEVEL=info
+      - DATABASE_URL=postgresql://experina:L6RCDRwgHAzCgB9q@postgres:5432/experina
+      - ALLOWED_HOSTS=*
+      - API_LOGGING=True
+      - SHOW_DOCS_IN_PRODUCTION_MODE=True
+      - SECRET_KEY='jfh0=qe=afsl)kvbqhe)z&&1-gk9b%h#rz1x@sx2j#-ch-tt@t'
+      - JWT_SECRET=notsafeforproduction
+      - SECURE_PROXY_SSL_HEADER=None
+      - SESSION_COOKIE_SECURE=False
+      - ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0

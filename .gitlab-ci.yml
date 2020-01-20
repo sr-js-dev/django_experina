@@ -1,0 +1,54 @@
+stages:
+  - test
+#  - deploy_staging
+  - deploy_production
+
+test:
+  stage: test
+  image: python:3.6
+
+#  services:
+#    - postgres:latest
+#
+#  variables:
+#    POSTGRES_DB: experina
+#    POSTGRES_USER: experina
+#    POSTGRES_PASSWORD: secret
+#    DATABASE_URL: "postgresql://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres:5432/$POSTGRES_DB"
+
+  cache:
+    paths:
+      - ~/.cache/pip/
+
+  before_script:
+    - python -V
+    - pip install -U pipenv
+    - pipenv install --system --deploy
+
+  script: py.test
+
+  coverage: '/^TOTAL\s+\d+\s+\d+\s+(\d+\%)$/'
+
+
+deploy_production:
+  stage: deploy_production
+  image: docker:git
+  before_script:
+  #  - docker login -u $CI_BUILD_TOKEN_USER -p $CI_BUILD_TOKEN_PASSWORD $CI_REGISTRY
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+
+  script:
+    - echo "Deploy to Production Server"
+      - ssh-keyscan -H $SERVER_HOST_NAME >> ~/.ssh/known_hosts
+      - git checkout master
+      - git status
+      - git remote add live ssh://$SERVER_USER@$SERVER_HOST_NAME/$SERVER_PRODUCTION_PATH
+      - git push --set-upstream live master
+
+  only:
+    - master
+

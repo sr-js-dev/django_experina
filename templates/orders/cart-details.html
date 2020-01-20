@@ -1,0 +1,98 @@
+    {% extends 'base.html' %}{% load static i18n cropping %}
+
+    {% block content %}
+        <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col p-sm-0">
+                    <h2 class="section-title-cart">
+                        {% blocktrans with total_items=cart.total_items %}Shopping cart - <span class="amount-items">{{ total_items }} items</span>{% endblocktrans %}
+                    </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-auto cart">
+                    <div class=" row cart-head">
+                        <div class="cart-head__item">{% trans 'Item' %}</div>
+                        <div class="cart-head__price">{% trans 'Unit Price' %}</div>
+                        <div class="cart-head__quantity">{% trans 'Quantity' %}</div>
+                        <div class="cart-head__total">{% trans 'Sub Total' %}</div>
+                    </div>
+                    {% for cart_item in cart %}
+                    <div class="row cart-item">
+                        <div class="item-card">
+                            <div
+                                class="item-card__img"
+                                style="
+                                    background: url({% cropped_thumbnail cart_item.product "cropping" %});
+                                    background-position: center;
+                                    background-repeat: no-repeat;
+                                    background-size: cover;">
+
+                            </div>
+                            <div class="item-card__info">
+                                <h3 class="item-card__title">{{ cart_item.product.name }}</h3>
+                                <div class="item-card__product-code">
+                                     {% trans 'Product Code:' %}<span>HK 00{{ cart_item.product.id }}</span>
+                                </div>
+                                <div class="item-card__availability">
+                                    {% trans 'In Stock' %}
+                                </div>
+                                <div class="item-card__delete">
+                                    <a id="delete_product" href="/cart/remove/{{ cart_item.product.id }}/?next={{ request.get_full_path }}">
+                                        {% trans 'Delete' %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-price" id="product_price_{{ product.id }}">€ {{ cart_item.price }}</div>
+                        <div class="item-quantity">
+                            <input
+                                id="product_counter"
+                                type="number"
+                                data-id="{{ cart_item.product.id }}"
+                                value="{{ cart_item.quantity }}"
+                                min="{{ cart_item.product.get_minimum_price.min_quantity }}"
+                                max="{{ cart_item.product.get_maximum_price.max_quantity }}">
+                            <a style="display: none" id="update_product_{{ cart_item.product.id }}" href="">{% trans 'Update' %}</a>
+                        </div>
+                        <div class="item-total" id="total_product_price_{{ product.id }}">€ {{ cart_item.total_price }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="col-auto col-md summary">
+                    <div class="summary__title">{% trans 'Summary' %}</div>
+                    <div class="summary__info">
+                        <div class="summary__info-subtotal">{% trans 'Subtotal' %} <span>€ {{ cart.get_total_price }}</span></div>
+                        <div class="summary__info-shipping">{% trans 'Shipping' %} <span>€ 0,00</span></div>
+                        <div class="summary__info-tax">{% trans 'Tax' %} <span>€ 0,00</span></div>
+                    </div>
+                    <div class="summary__total">{% trans 'Total' %} <span>€ {{ cart.get_total_price }}</span></div>
+                    <div class="summary__button-wrap">
+                        <a href="{% url 'create_order' %}">
+                            <div style="padding: 10px 25px;" class="summary__button">{% trans 'PROCEED TO PAYMENT' %}</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+{% block custom_javascript %}
+    <script>
+        let next_url = "&next="+'{{ request.get_full_path }}';
+        $('*#product_counter').change(function() {
+            update_url_to_change_quantity($(this).val(), $(this).data().id);
+        });
+        function update_url_to_change_quantity(quantity, productId) {
+            let url_to_update = $('#update_product_'+ productId.toString());
+            url_to_update.attr(
+                "href", "/cart/update/" +
+                productId.toString() + "/?quantity=" +
+                quantity.toString() +
+                next_url
+            );
+            url_to_update.css("display", 'block');
+        }
+    </script>
+{% endblock %}

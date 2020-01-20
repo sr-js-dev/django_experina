@@ -1,0 +1,79 @@
+{% extends 'base.html' %}{% load static cropping i18n %}
+
+{% block content %}
+
+ <div class="content-img">
+     <div class="banner">
+         <div class="banner-item">
+             <div class="banner-item-wrap">
+                 <img src="{% static 'img/image_slider.png' %}" class="banner-item__bg">
+                 <div class="container">
+                     <div class="banner-item__title">
+                         {% trans 'VIEW OUR EXCLUSIVE' %}
+                         <br>
+                         {% trans '<span>NEW</span> PRODUCTS FOR 2017' %}
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="top-categories">
+         <div class="container">
+             <div class="row">
+                 <div class="col p-sm-0">
+                     <h2 class="section-title-home">{% trans 'Top categories' %}</h2>
+                 </div>
+             </div>
+             <div class="row justify-content-md-between">
+                 {% for category in featured_categories.all %}
+                 <div class="col-12 col-md categories-item">
+                     <a href="{% url 'category_products' category.slug %}">
+                        <img src="{% cropped_thumbnail category "cropping" %}" alt="cups" class="categories-item__img">
+                     </a>
+                     <div class="categories-item__info">
+                         <h3 class="categoties-item__title">{{ category.name }}</h3>
+{#                         <a href="{% url 'category_products' category.slug %}" class="categories-item__link">{% trans 'Shop now' %}</a>#}
+                     </div>
+                 </div>
+                 {% endfor %}
+             </div>
+         </div>
+     </div>
+     <div class="feature">
+         <div class="container">
+             <div class="row">
+                 <div class="col p-sm-0">
+                     <h2 class="section-title-home">{% trans 'Feature item' %}</h2>
+                 </div>
+             </div>
+             <div class="row justify-content-md-between">
+                 {%  for product in featured_products.all %}
+                 <div class="col-12 col-sm-6 col-lg feature-item">
+                     <div class="feature-item__img-wrap">
+                         <a href="{% url 'product_details' product.slug %}">
+                            <img src="{% cropped_thumbnail product "cropping" %}" alt="" class="feature-item__img">
+                         </a>
+                     </div>
+                     <div class="feature-item__info" style="margin-top: 60px; margin-bottom: -15px;">
+                         <h3 class="feature-item__title">{{ product.name }}</h3>
+                         {% if product.get_minimum_price %}
+                            <span class="feature-item__price">
+                            {% if product.get_minimum_price.price != product.get_maximum_price.price %}
+                                € {{ product.get_minimum_price.price }} - € {{ product.get_maximum_price.price }}
+                            {% else %}
+                                € {{ product.get_minimum_price.price }}
+                            {% endif %}
+                            </span>
+                         {% else %}
+                             <span class="feature-item__price">€ - </span>
+                         {% endif %}
+                     </div>
+                 </div>
+                 {% endfor %}
+             </div>
+         </div>
+     </div>
+ </div>
+
+
+{% endblock %}

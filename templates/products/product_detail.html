@@ -1,0 +1,196 @@
+{% extends 'base.html' %}{% load static i18n cropping %}
+
+{% block content %}
+
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg info">
+                <div class="info-top">
+                    <div class="row justify-content-md-between">
+                        <div class="col-12 col-sm-4 col-md-6 info-top__img"><img src="{% cropped_thumbnail product "cropping" %}" alt=""></div>
+                            <div class="col-12 col-sm-8 col-md-6 info-top__details">
+                                <h3 class="info-top__title">{{ product.name }}</h3>
+                                <span class="info-top__price" id="product_price_{{ product.id }}">€ {{ product.get_minimum_price.price }}</span>
+                                <form id="form-details" action="{% url 'cart_add' product.id %}" method="POST">
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                        {% if field.name != "quantity" and field.name != "update_quantity" %}
+                                            <div class="form_row">
+                                                <b>{{ field.label }}</b>
+                                                {{ field }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <div class="form_row">
+                                        <div class="form_row__wrap">
+                                            {{ form.quantity }}
+                                            <button id="form-details__submit" type="submit">
+                                                {% trans 'Add to cart' %}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div
+                                    class="alert alert-danger alert-dismissible fade show"
+                                    id="noSizeColor"
+                                    style="display: none"
+                                    role="alert">
+                                    <strong>{% trans 'Please select color and/or size.' %}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-bottom">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#product-details" role="tab" aria-selected="true">{% trans 'PRODUCT DETAILS' %}</a>
+                            </li>
+                            {% if product.extra_info is not None %}
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#other-information" role="tab" aria-selected="false">{% trans 'OTHER INFORMATION' %}</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="product-details" role="tabpanel">
+                                <div class="product-details__description">
+                                    {{ product.description|safe }}
+                                </div>
+                            </div>
+                            {% if product.extra_info is not None %}
+                                <div class="tab-pane fade" id="other-information" role="tabpanel"><p>{{ product.extra_info|safe }}</p></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% if product.related.count %}
+                <div class="col-12 col-lg related">
+                    <div class="related__header">{% trans 'Related Product' %}</div>
+                    <div class="related__list">
+                        {% for rel_item in product.related.all %}
+                            <div class="related-list-item">
+                                <div class="related-list-item__imgWrap">
+                                    <img src="{% cropped_thumbnail rel_item "cropping_related" %}" alt="{{ rel_item.name }}">
+                                </div>
+                                <div class="related-list-item__info">
+                                    <h4 class="related-list-item__info-title">{{ rel_item.name }}</h4>
+                                    <span class="related-list-item__info-price">€ {{ rel_item.get_minimum_price.price }}</span>
+                                    <a
+                                        href="{% url 'product_details' rel_item.slug %}"
+                                        class="related-list-item__info-link">
+                                        {% trans 'View details' %}
+                                        <svg
+                                            class="arr-right"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 6.67 11.94"
+                                            width="5px">
+                                            <defs><style>.cls-1 {fill: #FB9728;}</style></defs>
+                                            <title>arrow_right</title>
+                                            <path
+                                                class="cls-1"
+                                                d="M.21.21a.71.71,0,0,1,1,0L6.47,5.47a.71.71,0,0,1,0,1L1.2,11.73a.71.71,0,0,1-1-1L5,6,.21,1.2A.71.71,0,0,1,.21.21Z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <hr>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block custom_javascript %}
+<script>
+    let priceRanges = [
+        {% for price in product.all_variations %}
+            {   min_quantity: {{ price.min_quantity }},
+                max_quantity: {{ price.max_quantity }},
+                color: '{{ price.color.name }}',
+                size: '{{ price.size.name }}',
+                price: '{{ price.price }}'
+            }{% if forloop.last %}{% else %},{% endif %}
+        {% endfor %}
+    ];
+    let counter = $('#product_counter');
+    let product_id = {{ product.id }};
+    let size = '';
+    let color = '';
+    let custom_image = '';
+    let custom_color = '';
+    let quantity = counter.val();
+    let price = '{{ product.get_minimum_price.price }}';
+    let next = '{{ request.get_full_path }}';
+
+    $('#select-image').on('change', function () {
+        custom_image = $("#select-image option:selected").text();
+    });
+    $('#select-color').on('change', function () {
+        custom_color = $("#select-color option:selected").text();
+    });
+
+    $('#select-size').on('change', function () {
+        check_and_set_price(product_id, quantity);
+    });
+
+    $('#select-sports').on('change', function () {
+        check_and_set_price(product_id, quantity);
+    });
+
+    counter.change(function() {
+        check_and_set_price($(this).data().id, $(this).val());
+    });
+
+    function check_and_set_price(productId, quant) {
+
+        color = $("#select-sports option:selected").text();
+        size = $("#select-size option:selected").text();
+        quantity = quant;
+            console.log(`
+                productId: ${productId}
+                quantity: ${quantity}
+                color: ${color}
+                size: ${size}
+                `);
+        let newPrice = price;
+        for ( let i=0; i<priceRanges.length; i++ ) {
+            if (
+                priceRanges[i].min_quantity <= quantity &&
+                quantity <= priceRanges[i].max_quantity &&
+                (color === priceRanges[i].color || color === '') &&
+                (size === priceRanges[i].size || size === '')
+            ) {
+                newPrice = priceRanges[i].price;
+                break;
+            }
+        }
+        if (newPrice !== price) {
+            let product_price = $('#product_price_'+ productId.toString());
+            product_price.html("€ " + newPrice.toString());
+            price = newPrice;
+        }
+    }
+
+    $('#form-details__submit').on('click', function (event) {
+        event.preventDefault();
+        if (
+            color === null || color === '' || size === null || size === ''
+        ) {
+            $('')
+        } else {
+            let size_url = "size="+size;
+            let color_url = "&color="+color;
+            let custom_image_url = "&custom_image="+custom_image;
+            let custom_color_url = "&custom_color="+custom_color;
+            let quantity_url = "&quantity="+quantity;
+            let next_url = "&next="+next;
+            window.location.href = "/cart/add/"+product_id+"?"+size_url+color_url+custom_color_url+custom_image_url+quantity_url+next_url;
+        }
+    });
+
+</script>
+{% endblock %}
+

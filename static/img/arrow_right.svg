@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6.67 11.94">
+    <defs>
+        <style>
+        .cls-1 {
+            fill: #616161;
+        }
+        </style>
+    </defs>
+    <title>arrow_right</title>
+    <path class="cls-1" d="M.21.21a.71.71,0,0,1,1,0L6.47,5.47a.71.71,0,0,1,0,1L1.2,11.73a.71.71,0,0,1-1-1L5,6,.21,1.2A.71.71,0,0,1,.21.21Z" />
+</svg>

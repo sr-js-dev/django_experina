@@ -1,0 +1,158 @@
+    {% extends 'base.html' %}{% load static i18n %}
+
+    {% block content %}
+        <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2 class="section-title-checkout">{% trans 'Checkout' %}</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-auto checkout">
+                    <div class="checkout-head">
+                        <div class="checkout-head__item checkout-head__item--active">{% trans 'SHIPPING' %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6.67 11.94" width="6px" height="12px">
+                                <defs>
+                                    <style>.cls-1 {fill: #757575;}</style>
+                                </defs>
+                                <title>arrow_right</title>
+                                <path class="cls-1" d="M.21.21a.71.71,0,0,1,1,0L6.47,5.47a.71.71,0,0,1,0,1L1.2,11.73a.71.71,0,0,1-1-1L5,6,.21,1.2A.71.71,0,0,1,.21.21Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="checkout__info">{% trans 'YOUR SHIPPING INFORMATION' %}</div>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            {% for error in form.non_field_errors %}
+                                <div class="callout alert" data-closable>
+                                    <button class="close-button" aria-label="Close alert" type="button" data-close>
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="shipping-info">
+                            <div class="shipping-info-left">
+                                <div class="shipping-info__item">
+                                    <label for="">{% trans 'First name:' %}</label>
+                                    {% if form.errors %}{% for field in form %}
+                                        {% ifequal field form.first_name %}{% for error in field.errors %}
+                                            <div class="callout alert" data-closable>
+                                                <button class="close-button" aria-label="Close alert" type="button" data-close>
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}{% endifequal %}
+                                    {% endfor %}{% endif %}
+                                    {{ form.first_name }}
+                                </div>
+                                <div class="shipping-info__item">
+                                    <label for="">{% trans 'Last Name:' %}</label>
+                                    {% if form.errors %}{% for field in form %}
+                                        {% ifequal field form.last_name %}{% for error in field.errors %}
+                                            <div class="callout alert" data-closable>
+                                                <button class="close-button" aria-label="Close alert" type="button" data-close>
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}{% endifequal %}
+                                    {% endfor %}{% endif %}
+                                    {{ form.last_name }}
+                                </div>
+                                <div class="shipping-info__item">
+                                    <label for="">{% trans 'Email:' %}</label>
+                                    {% if form.errors %}{% for field in form %}
+                                        {% ifequal field form.email %}{% for error in field.errors %}
+                                            <div class="callout alert" data-closable>
+                                                <button class="close-button" aria-label="Close alert" type="button" data-close>
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}{% endifequal %}
+                                    {% endfor %}{% endif %}
+                                    {{ form.email }}
+                                </div>
+                            </div>
+                            <div class="shipping-info-right">
+                                <div class="shipping-info__item">
+                                    <label for="">{% trans 'Address:' %}</label>
+                                    {% if form.errors %}{% for field in form %}
+                                        {% ifequal field form.address %}{% for error in field.errors %}
+                                            <div class="callout alert" data-closable>
+                                                <button class="close-button" aria-label="Close alert" type="button" data-close>
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}{% endifequal %}
+                                    {% endfor %}{% endif %}
+                                    {{ form.address }}
+                                </div>
+                                <div class="shipping-info__item">
+                                    <label for="">{% trans 'Postal code:' %}</label>
+                                    {% if form.errors %}{% for field in form %}
+                                        {% ifequal field form.postal_code %}{% for error in field.errors %}
+                                            <div class="callout alert" data-closable>
+                                                <button class="close-button" aria-label="Close alert" type="button" data-close>
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}{% endifequal %}
+                                    {% endfor %}{% endif %}
+                                    {{ form.postal_code }}
+                                </div>
+                                <div class="shipping-info__item">
+                                    <label for="">{% trans 'City:' %}</label>
+                                    {% if form.errors %}{% for field in form %}
+                                        {% ifequal field form.city %}{% for error in field.errors %}
+                                            <div class="callout alert" data-closable>
+                                                <button class="close-button" aria-label="Close alert" type="button" data-close>
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}{% endifequal %}
+                                    {% endfor %}{% endif %}
+                                    {{ form.city }}
+                                </div>
+                            </div>
+                        </div>
+                            <div class="shipping-info__item">
+                                <label for="">{% trans 'Remarks:' %}</label>
+                                {% if form.errors %}{% for field in form %}
+                                    {% ifequal field form.city %}{% for error in field.errors %}
+                                        <div class="callout alert" data-closable>
+                                            <button class="close-button" aria-label="Close alert" type="button" data-close>
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}{% endifequal %}
+                                {% endfor %}{% endif %}
+                                {{ form.remarks }}
+                            </div>
+                        <button type="submit" class="continue-button">{% trans 'submit' %}</button>
+                    </form>
+                </div>
+                <div class="col-auto col-md summary">
+                    <div class="summary__title">{% trans 'Summary' %}</div>
+                    <div class="summary__info">
+                        <div class="summary__info-subtotal">{% trans 'Subtotal' %} <span>€ {{ cart.get_total_price }}</span></div>
+                        <div class="summary__info-shipping">{% trans 'Shipping' %} <span>€ 0,00</span></div>
+                        <div class="summary__info-tax">{% trans 'Tax' %} <span>€ 0,00</span></div>
+                    </div>
+                    <div class="summary__total">{% trans 'Total' %} <span>€ {{ cart.get_total_price }}</span></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    {% endblock %}

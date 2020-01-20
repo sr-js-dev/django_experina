@@ -1,0 +1,44 @@
+{% extends 'base.html' %}{% load static i18n cropping %}
+{% block content %}
+    <div class="content">
+        <div class="list-view">
+            <div class=" container ">
+                <div class="row align-items-center section-header ">
+                    <div class="col col-md-auto p-md-0">
+                        <h3 class="section-list">{% blocktrans %} Search result by '{{ q_term }}':{% endblocktrans %}</h3>
+                    </div>
+                    {% if products.count %}
+                    <div class="col-12 col-md  filters">
+                        <a href="#" class="filters__show-all">{% blocktrans with product_count=products.count %}Showing {{ product_count }} Results{% endblocktrans %}</a>
+                    </div>
+                    {% endif %}
+                </div>
+            {% if products.count %}
+                <div class="row">
+                    {% for product in products.all %}
+                    <div class="col-md-3 col-sm-6">
+                        <div class="product-grid">
+                            <div class="product-image">
+                                <a href="{% url 'product_details' product.slug %}">
+                                    <img
+                                        class="card-img-top"
+                                        src="{% cropped_thumbnail product "cropping_category" %}"
+                                        alt="{{ product.name }}">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title"><a href="{% url 'product_details' product.slug %}">{{ product.name }}</a></h3>
+                                <div class="price"> € {{ product.get_minimum_price.price }}</div>
+                                <a class="add-to-cart" href="{% url 'product_details' product.slug %}">+ {% trans 'Add to cart' %}</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <h6 class="section-list">{% trans 'No products found...' %}</h6>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

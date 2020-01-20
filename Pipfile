@@ -1,0 +1,25 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+django = "==2.1.5"
+"psycopg2-binary" = "==2.7.6.1"
+django-environ = "*"
+pillow = "==5.4.1"
+django-admin-generator = "==2.1.0"
+django-image-cropping = "==1.2.0"
+easy-thumbnails = "==2.5"
+django-extensions = "*"
+pytest = "*"
+coverage = "*"
+pytest-cov = "*"
+pytest-django = "*"
+django-ckeditor = "*"
+ipdb = "*"
+
+[requires]
+python_version = "3.6"

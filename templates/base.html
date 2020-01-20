@@ -1,0 +1,193 @@
+{% load static i18n cropping %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slick-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.formstyler.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.formstyler.theme.css' %}">
+    <!-- <link rel="stylesheet" href="css/main-style.css"> -->
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+
+    <title>Home</title>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logoStar">
+            <img src="{% static 'img/logoStar.png' %}" alt="">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm logo">
+                    <a href="{% url 'homepage' %}"><img src="{% static 'img/logoMain.png' %}" alt=""></a>
+                </div>
+                <div class="col-md search">
+                    <form method="GET" action="{% url 'search' %}?">
+                        <button style="cursor: pointer;background-color: transparent;border-color: white;" type="submit" >
+                            <img src="{% static 'img/search.png' %}" width="17px" alt="" style="position:relative;bottom:3px;">
+                        </button>
+
+                        <input name="q" type="search" value="{{ q_term }}" placeholder="{% trans 'SEARCH' %}">
+                    </form>
+                </div>
+                <div class="col-12 col-sm account">
+                    <ul>
+                        <li>
+                            <a class="account__link account__link-shop" href="#">
+                                <img src="{% static 'img/shop_grey.svg' %}" width="20px" alt="" class="iconMR">
+                                <span style="min-width: 38px">{% trans 'shop' %}</span>
+                            </a>
+                        </li>
+{#                        <li>#}
+{#                            <a class="account__link" href="login-page.html"> <img src="{% static 'img/login (1).svg' %}" width="20px" alt="" class="iconMR"> <span>sign in</span></a></li>#}
+                        <li>
+                            <a class="account__link" href="{% url 'cart_detail' %}">
+                                <div class="bg-circle"></div>
+                                <div class="cart-count">{{ cart.total_items }}</div>
+                                <img src="{% static 'img/cart_grey.svg' %}" width="19px" alt="" class="iconMR">
+                                <span>{% trans 'cart' %}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- END HEADER -->
+    <!-- NAV -->
+    <div class="nav-wrap">
+        <div class="container" style="position: relative;">
+            <nav class="navbar navbar-expand-md p-0">
+                <div class="col search-md">
+                    <form action="{% url 'search' %}">
+                        <img src="{% static 'img/search_white.svg' %}" width="17px" alt="" style="position:relative;bottom:3px;">
+                        <input type="submit" placeholder="{% trans 'SEARCH' %}">
+                    </form>
+                </div>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="col-12 collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link-active" href="{% url 'homepage' %}">{% trans 'home' %}</a></li>
+                        <li class="nav-item"><a href="{% url 'about' %}">{% trans 'about experina' %}</a></li>
+                        <li class="nav-item"><a href="{% url 'contact' %}">{% trans 'contact' %}</a></li>
+{#                        <li class="nav-item"><a href="news.html">{% trans 'news & blog' %}</a></li>#}
+                    </ul>
+                </div>
+            </nav>
+            <div class="shop-popup">
+                <div class="container">
+                    <div class="row">
+                        {% for category in categories %}
+                            <col-12 class="col-sm-6 col-md-3 shop-popup__col">
+                                <a href="{% url 'category_products' category.slug %}" class="shop-popup__category">
+                                    <img style="width: 35px;border-radius: 4px;margin-right: 5px" src="{% cropped_thumbnail category "cropping" %}" alt="">
+                                    {{ category.name }}
+                                </a>
+                            </col-12>
+                        {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END NAV -->
+    <!-- CONTENT -->
+    {% if messages %}
+        <div class="messages row">
+            <div class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content">
+                {% for message in messages %}
+                    <div
+                        class="alert alert-{% if message.tags %}{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}{% endif %} alert-dismissible fade show"
+                        role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+    <!-- END CONTENT -->
+    <!-- FOOTER -->
+    <footer>
+        <div class="container ">
+            <div class="row ">
+                <div class="col-12 col-sm-6 col-md logo-footer ">
+                    <a href="/"> <img src="{% static 'img/logoFooter.png' %}" alt="Experina Sportprijzen"></a>
+                </div>
+                <div class="col-12 col-sm-6 col-md address ">
+                    <div class="footer-item-wrap ">
+                        <p class="textFooter ">{% trans 'addresss' %}</p>
+                        <p class="textFooterOther ">
+                            Torenstraat 41
+                        </p>
+                        <p class="textFooterOther ">
+                            9203 BD, Drachten
+                        </p>
+                        <p class="textFooterOther ">
+                            0512-841410 / 06-21916677
+                        </p>
+                        <p class="textFooterOther ">
+                            <a href="mailto:sportpriis@experina.nl">sportpriis@experina.nl</a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+    <!-- END FOOTER -->
+    <div class="copyright ">
+        <div class="container ">
+            <div class="row align-items-center justify-content-between ">
+                <div class="col-12 col-lg-auto d-flex justify-content-center justify-content-lg-start ">
+                    <p class=" copyrightText1 ">
+                        © Copyright {% now "Y" %} {% trans 'Experina Sportprijzen All Rights Reserved.' %}
+                        <a href="/">{% trans 'T&C' %}</a>
+                        <span>|</span>
+                        <a href="/">{% trans 'Privacy Policy' %}</a>
+                    </p>
+                </div>
+                <div class="col-12 col-lg d-flex justify-content-center justify-content-lg-end ">
+                    <a href="http://www.johanboerema.nl" class="copyrightText2 ">{% trans 'Designed by Johan Boerema' %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+    <!-- <script src="js/slick.min.js"></script> -->
+    <!-- <script src="js/slick-init.js"></script> -->
+    <script src="{% static 'js/jquery.formstyler.min.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+
+    {% block custom_javascript %}
+    {% endblock %}
+</body>
+
+</html>
